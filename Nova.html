@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nova.cc</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{background:radial-gradient(circle at 20% 30%,#2b0a4d,#05010a 60%);color:white;overflow:hidden;}
+.page{position:absolute;width:100%;height:100%;top:0;left:0;opacity:0;pointer-events:none;transition:opacity .8s ease;overflow-y:auto;}
+.active{opacity:1;pointer-events:auto;}
+#particles{position:fixed;width:100%;height:100%;z-index:-1;}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:25px 8%;}
+.logo{font-weight:700;font-size:22px;}
+.logo span{color:#a855f7;}
+.nav-btn{padding:10px 20px;border-radius:30px;border:1px solid rgba(168,85,247,.5);background:transparent;color:white;cursor:pointer;transition:.3s;}
+.nav-btn:hover{background:#a855f7;box-shadow:0 0 15px #a855f7;}
+.error404{color:red;opacity:0;transition:.5s;text-align:right;margin-right:8%;}
+
+.hero{text-align:center;padding:150px 20px;}
+.hero h1{font-size:64px;font-weight:700;background:linear-gradient(90deg,#c084fc,#9333ea);-webkit-background-clip:text;color:transparent;}
+.hero p{margin-top:15px;color:#ccc;}
+.hero small{display:block;margin-top:10px;color:#777;}
+
+.primary-btn,.secondary-btn{padding:14px 35px;border-radius:40px;margin:10px;cursor:pointer;transition:.3s;}
+.primary-btn{background:linear-gradient(90deg,#9333ea,#a855f7);border:none;color:white;}
+.primary-btn:hover{transform:translateY(-4px);box-shadow:0 0 25px #9333ea;}
+.secondary-btn{border:1px solid #9333ea;background:transparent;color:white;}
+.secondary-btn:hover{background:#9333ea;}
+
+.features-wrap{padding:100px 8%;}
+.section-title{text-align:center;margin-bottom:50px;}
+.grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:25px;}
+.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(20px);border-radius:20px;padding:35px;transition:.3s;}
+.card:hover{transform:translateY(-8px);box-shadow:0 0 30px rgba(147,51,234,.4);}
+.card h3{color:#c084fc;margin-bottom:10px;}
+
+.pricing{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:120px 8%;}
+.plan{width:260px;padding:30px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(15px);text-align:center;transition:.3s;}
+.plan:hover{transform:translateY(-8px);box-shadow:0 0 25px #9333ea;}
+.price{font-size:32px;color:#a855f7;margin:15px 0;}
+
+footer{text-align:center;padding:40px;color:#777;}
+
+/* key */
+.key-panel{max-width:500px;margin:150px auto;padding:40px;border-radius:20px;background:rgba(255,255,255,.05);backdrop-filter:blur(20px);text-align:center;}
+.progress-bar{height:10px;background:#222;border-radius:20px;margin:20px 0;overflow:hidden;}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#9333ea,#c084fc);transition:.5s;}
+.unlock-btn{opacity:0;transition:.5s;}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- Hpage -->
+<div class="page active" id="home">
+<nav>
+  <div class="logo">Nova<span>.cc</span></div>
+  <button class="nav-btn" onclick="showError()">Login</button>
+</nav>
+<div class="error404" id="err">ERROR 404</div>
+
+<section class="hero">
+  <h1>Nova.cc GUI</h1>
+  <p>Best Button Friendly GUI</p>
+  <small>coded by F3li7</small>
+  <div>
+    <button class="primary-btn" onclick="goPage('features')">Get Started</button>
+    <button class="secondary-btn" onclick="goPage('pricing')">Purchase Nova Key</button>
+    <br>
+    <button class="secondary-btn" onclick="goPage('keysystem')">Free Download</button>
+  </div>
+</section>
+</div>
+
+<!-- feed -->
+<div class="page" id="features">
+<div class="features-wrap">
+  <div class="section-title">
+    <h2>Why Choose Us?</h2>
+    <p>Experience the best service in the market</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Instant Delivery</h3><p>Automated system delivers instantly 24/7.</p></div>
+    <div class="card"><h3>Secure Payments</h3><p>Encrypted industry-standard systems.</p></div>
+    <div class="card"><h3>24/7 Support</h3><p>Dedicated team ready anytime.</p></div>
+    <div class="card"><h3>Community</h3><p>Thousands of satisfied users.</p></div>
+    <div class="card"><h3>Regular Updates</h3><p>We constantly improve Nova.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- lise -->
+<div class="page" id="pricing">
+<div class="pricing">
+  <div class="plan"><h3>Starter</h3><div class="price">$5</div></div>
+  <div class="plan"><h3>Basic</h3><div class="price">$15</div></div>
+  <div class="plan"><h3>Pro</h3><div class="price">$40</div></div>
+  <div class="plan"><h3>Elite</h3><div class="price">$80</div></div>
+  <div class="plan"><h3>Lifetime Key</h3><div class="price">$140</div></div>
+</div>
+</div>
+
+<!-- lab -->
+<div class="page" id="keysystem">
+<div class="key-panel">
+  <h2>Complete Steps to Unlock Download</h2>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <button class="secondary-btn" onclick="completeStep(1,'https://scratch.mit.edu/')">Visit Website</button><br>
+  <button class="secondary-btn" onclick="completeStep(2,'https://www.youtube.com/@Hits0293')">Subscribe Channel</button><br>
+  <button class="secondary-btn" onclick="completeStep(3,'https://youtu.be/0PV-bo6-n4Y?si=s96xtKpXEN27Re4w')">Like Video</button><br>
+
+  <button class="primary-btn unlock-btn" id="downloadBtn" onclick="downloadNova()">Download Now</button>
+</div>
+</div>
+
+<footer>© 2026 Nova.cc</footer>
+
+<script>
+function goPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function showError(){const e=document.getElementById('err');e.style.opacity=1;setTimeout(()=>e.style.opacity=0,3000);}
+
+// stuffs
+let stepsDone=0;
+function completeStep(step,link){
+  window.open(link,'_blank');
+  if(!document.getElementById('step'+step)){
+    stepsDone++;
+    let prog=(stepsDone/3)*100;
+    document.getElementById('progress').style.width=prog+'%';
+    if(stepsDone>=3){
+      document.getElementById('downloadBtn').style.opacity=1;
+    }
+  }
+}
+
+// DOWNLOAD
+function downloadNova(){
+  const link=document.createElement("a");
+  link.href="NovaInstaller.exe";
+  link.download="Nova.cc-Installer.exe";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// parts
+const c=document.getElementById("particles"),ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+let arr=[];class P{constructor(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.s=Math.random()*2;this.vx=Math.random()-.5;this.vy=Math.random()-.5;}u(){this.x+=this.vx;this.y+=this.vy;if(this.s>0.2)this.s-=.01;}d(){ctx.fillStyle="#a855f7";ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,6.28);ctx.fill();}}
+for(let i=0;i<150;i++)arr.push(new P());
+(function a(){ctx.clearRect(0,0,c.width,c.height);arr.forEach((p,i)=>{p.u();p.d();if(p.s<=.2){arr.splice(i,1);arr.push(new P());}});requestAnimationFrame(a);})();
+</script>
+
+</body>
+</html>
